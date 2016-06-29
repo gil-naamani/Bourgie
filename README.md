@@ -1,2 +1,2 @@
 # Bourgie
-Budgeting Application for Millenials
+Time is money. Save both
