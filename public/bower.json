@@ -1,0 +1,14 @@
+{
+  "name": "Bourgie",
+  "description": "Budgetting App",
+  "version": "1.0.0",
+  "homepage": "http://localhost:3000/",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "bootstrap": "*",
+    "jquery": "*"
+  }
+}
