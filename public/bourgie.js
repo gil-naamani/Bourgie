@@ -19,3 +19,16 @@ bourgie.config(['$routeProvider', function($routeProvider){
     redirectTo : '/'
   });
 }])
+
+bourgie.controller('loginController', ['$scope', function($scope){
+
+  $scope.username = null;
+  $scope.password = null;
+
+  $scope.tabNames = ['Sign In', 'Sign Up'];
+}]);
+
+bourgie.controller('homeController', ['$scope', function($scope){
+
+  $scope.session = null;
+}]);

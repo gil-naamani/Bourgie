@@ -1,23 +1,43 @@
+
 <div class="outer-container">
+
   <div class="inner-container">
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Username</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" placeholder="username">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Password</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" placeholder="Password">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-default">Sign in</button>
-        </div>
-      </div>
+    <form name="outerForm" class="tab-form-demo">
+      <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="Sign In">
+          </br>
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" class="form-control" required ng-model="usrObj.username"/>
+            </br>
+              <label>Password</label>
+              <input type="password" class="form-control" required ng-model="usrObj.password"/>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <a ng-click="signIn()" class="btn btn-lg btn-outline landing-button">
+                    Sign in
+                </a>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="Sign Up">
+          </br>
+            <div class="form-group">
+              <label>New Username</label>
+              <input type="text" class="form-control" required ng-model="usrObj.newUsername"/>
+            </br>
+              <label>New Password</label>
+              <input type="password" class="form-control" required ng-model="usrObj.newPassword"/>
+            </br>
+                <label ng-if="usrObj.newPassword">Repeat Password</label>
+                <input ng-if="usrObj.newPassword" type="password" class="form-control" ng-model="usrObj.repeatPassword"/>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <a ng-click="signUp()" class="btn btn-lg btn-outline landing-button">
+                    Sign up
+                </a>
+            </div>
+        </uib-tab>
+      </uib-tabset>
     </form>
   </div>
 </div>
