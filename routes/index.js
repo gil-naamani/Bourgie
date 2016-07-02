@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.sendFile("public/index.html");
-});
+/* Initialize the routers here */
+/******************************/
+
+var users = require('./users');
+
+/* define routes for each router */
+/******************************/
+router.use('/users', users);
 
 module.exports = router;

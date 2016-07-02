@@ -10,6 +10,7 @@
     "angular-route": "~1.4.0",
     "angular-bootstrap":"*",
     "bootstrap": "*",
-    "jquery": "*"
+    "jquery": "*",
+    "mysql": "~2.8.0"
   }
 }
