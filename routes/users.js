@@ -26,10 +26,12 @@ router.put('/signin/', function(req, res, next) {
 
   var username = req.body.username;
   var password = req.body.password;
+  var tkn = newToken(username);
+  var hash = md5hash(password);
 
-  var sql = 'UPDATE users SET token = "'+ newToken(username) + '" '+
+  var sql = 'UPDATE users SET token = "'+ tkn + '" '+
             'WHERE username = "'+ username +'" '+
-            'AND password = "'+ md5hash(password) +'"';
+            'AND password = "'+ hash +'"';
 
   console.log(sql);
   pool.getConnection(function(err, db){
@@ -37,11 +39,29 @@ router.put('/signin/', function(req, res, next) {
     db.query(sql, function(err, rows, fields){
       db.release();
       if (!err){
-        res.send(rows);
+        //success! but did we actually find a user to update?
+        numFound = rows["affectedRows"];
+        if (numFound){
+          res.send({
+            type : true,
+            data : { username : username, token : tkn},
+            error : null
+          });
+        } else {
+          res.send({
+            type : false,
+            data : { username : username, token : null},
+            error : 'invalid username or password'
+          });
+        };
       } else {
-        res.send(err);
+        res.send({
+          type : false,
+          data : { username : username, token : null},
+          error : err["code"]
+        });
       };
-    })
+    });
   });
 });
 
@@ -49,10 +69,12 @@ router.post('/signup/', function(req, res, next) {
 
   var username = req.body.username;
   var password = req.body.password;
+  var tkn = newToken(username);
+  var hash = md5hash(password);
+
 
   var sql = 'INSERT INTO users (username, password, token) ' +
-            'VALUES ("'+ username +'","'+ md5hash(password) +'","'+
-             newToken(username)+'")';
+            'VALUES ("'+ username +'","'+ hash +'","'+ tkn +'")';
 
   console.log(sql);
   pool.getConnection(function(err, db){
@@ -60,11 +82,27 @@ router.post('/signup/', function(req, res, next) {
     db.query(sql, function(err, rows, fields){
       db.release();
       if (!err){
-        res.send(rows);
+        res.send({
+          type : true,
+          data : { username : username, token : tkn},
+          error : null
+        });
       } else {
-        res.send(err);
+        if (err["errno"] === 1062){
+          res.send({
+            type : false,
+            data : { username : username, token : null},
+            error : 'username already exists'
+          });
+        } else {
+          res.send({
+            type : false,
+            data : { username : username, token : null},
+            error : err["code"]
+          });
+        };
       };
-    })
+    });
   });
 });
 
