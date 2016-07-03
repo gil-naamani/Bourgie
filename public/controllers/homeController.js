@@ -1,7 +1,4 @@
-bourgie.controller('loginController', ['$scope', function($scope){
+bourgie.controller('homeController', ['$scope', function($scope){
 
   $scope.username = null;
-  $scope.password = null;
-
-  $scope.tabNames = ['Sign In', 'Sign Up'];
 }]);

@@ -1,4 +1,6 @@
-bourgie.controller('loginController', ['$scope', '$location', function($scope, $location){
+bourgie.controller('loginController', ['$rootScope', '$scope', '$location', '$localStorage', 'authService',
+    function($rootScope, $scope, $location, $localStorage, authService){
+
   $scope.usrObj = {
     username : null,
     password : null,
@@ -7,15 +9,44 @@ bourgie.controller('loginController', ['$scope', '$location', function($scope, $
     repeatPassword : null
   };
 
-  $scope.signUp = function(){
-    $scope.setSecret($scope.usrObj.newUsername,$scope.usrObj.newUsername);
-    $location.path("budget");
-  }
+  $scope.signIn = function() {
+    var formData = {
+        username: $scope.usrObj.username,
+        password: $scope.usrObj.password
+    };
 
-  $scope.signIn = function(){
-    $scope.setSecret($scope.usrObj.username,$scope.usrObj.username);
-    $location.path("budget");
-  }
+    authService.signin(formData, function(res) {
+         if (res.type == false) {
+             alert(res.data)
+         } else {
+             console.log(res.data.token);
+             $localStorage.token = res.data.token;
+             $scope.setToken(formData.username,$localStorage.token);
+             $location.path("budget");
+         }
+     }, function() {
+         $rootScope.error = 'Failed to signin';
+     });
+  };
+
+  $scope.signUp = function() {
+     var formData = {
+         username: $scope.usrObj.newUsername,
+         password: $scope.usrObj.newPassword
+     };
+
+     authService.signup(formData, function(res) {
+         if (res.type == false) {
+             alert(res.data)
+         } else {
+             $localStorage.token = res.data.token;
+             $location.path("budget");
+             $scope.setToken(formData.username,$localStorage.token);
+         }
+     }, function() {
+         $rootScope.error = 'Failed to signup';
+     });
+  };
 
   $scope.verifyRepeat = function(){
     if ($scope.usrObj.newPassword == null || $scope.usrObj.newPassword == ""){
@@ -25,6 +56,6 @@ bourgie.controller('loginController', ['$scope', '$location', function($scope, $
       return false;
     }
     return true;
-  }
+  };
 
 }]);

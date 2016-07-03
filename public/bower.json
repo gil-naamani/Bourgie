@@ -11,6 +11,6 @@
     "angular-bootstrap":"*",
     "bootstrap": "*",
     "jquery": "*",
-    "mysql": "~2.8.0"
+    "ngstorage": "*"
   }
 }

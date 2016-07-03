@@ -7,16 +7,26 @@ var pool = require('../db').pool;
 
 router.get('/:username', function(req, res, next) {
 
-  var sql = 'SELECT count(*) from users';
+  var user = req.params.username;
 
+  var sql = 'SELECT count(*) AS count FROM users '+
+            'WHERE username = "'+ user + '"';
+
+  console.log(sql);
   pool.getConnection(function(err, db){
 
     db.query(sql, function(err, rows, fields){
       db.release();
       if (!err){
-        res.send(rows[0]);
+        if (rows[0]["count"] > 0){
+          res.send({type : true});
+        } else {
+          res.send({type : false});
+        }
       } else {
-        res.send(err);
+        res.send({type : false,
+                  data : null,
+                  error : err});
       };
     })
   });

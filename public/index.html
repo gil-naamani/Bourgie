@@ -21,11 +21,14 @@
       <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
       <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
       <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script type="text/javascript" src="bower_components/ngstorage/ngStorage.min.js"></script>
       <!-- Application JavaScript -->
       <script type="text/javascript" src="bourgie.js"></script>
+      <script type="text/javascript" src="services/authService.js"></script>
       <script type="text/javascript" src="controllers/globalController.js"></script>
       <script type="text/javascript" src="controllers/homeController.js"></script>
       <script type="text/javascript" src="controllers/loginController.js"></script>
+      <script type="text/javascript" src="controllers/scheduleController.js"></script>
       <!-- <script type="text/javascript" src="services.js"></script>
       <script type="text/javascript" src="userService.js"></script>
       <script type="text/javascript" src="directives.js"></script> -->
@@ -55,14 +58,14 @@
                             <a href="#page-top"></a>
                         </li>
                         <li class="page-scroll">
-                            <a class="nav-a" href="#/Budget" ng-if="secret">Budget</a>
+                            <a class="nav-a" href="#/budget" ng-if="token">Budget</a>
                         </li>
                         <li class="page-scroll">
-                            <a class="nav-a" href="#/Schedule" ng-if="secret">Schedule</a>
+                            <a class="nav-a" href="#/schedule" ng-if="token">Schedule</a>
                         </li>
                         <li class="page-scroll">
-                            <a class="nav-a" href="#/login" ng-hide="secret">Login</a>
-                            <a class="nav-a" ng-show="secret">{{user}}</a>
+                            <a class="nav-a" href="#/login" ng-hide="token">Login</a>
+                            <a class="nav-a" ng-show="token" ng-click="signOut()"> {{user}} - Sign out</a>
                         </li>
                     </ul>
                 </div>
