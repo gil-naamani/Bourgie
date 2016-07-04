@@ -11,6 +11,7 @@
     "angular-bootstrap":"*",
     "bootstrap": "*",
     "jquery": "*",
-    "ngstorage": "*"
+    "ngstorage": "*",
+    "angular-jwt": "*"
   }
 }

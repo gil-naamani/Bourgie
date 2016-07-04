@@ -1,39 +1,20 @@
 angular.module('bourgie')
-    .factory('authService', ['$http', '$localStorage', function($http, $localStorage){
-        // var baseUrl = "your_service_url";
-        function changeUser(user) {
-            angular.extend(currentUser, user);
-        }
-
-        function urlBase64Decode(str) {
-            var output = str.replace('-', '+').replace('_', '/');
-            switch (output.length % 4) {
-                case 0:
-                    break;
-                case 2:
-                    output += '==';
-                    break;
-                case 3:
-                    output += '=';
-                    break;
-                default:
-                    throw 'Illegal base64url string!';
-            }
-            return window.atob(output);
-        }
+    .factory('authService', ['$http', '$localStorage', 'jwtHelper', '$q', function($http, $localStorage, jwtHelper, $q){
 
         function getUserFromToken() {
             var token = $localStorage.token;
             var user = undefined;
-            if (typeof token !== 'undefined') {
-                var encoded = token.split('.')[1];
-                user = urlBase64Decode(encoded);
-                console.log(user);
+            if (token) {
+              user = jwtHelper.decodeToken(token).user;
             }
             return user;
         }
 
         var currentUser = getUserFromToken();
+
+        function isUserValid(user){
+            return $http.get('/users/'+user);
+        };
 
         return {
             signup: function(data, success, error) {
@@ -51,12 +32,44 @@ angular.module('bourgie')
             getCurrentUser: function(){
               return getUserFromToken();
             },
-            // TODO: also make sure the token has not expired
             isAuthenticated: function(){
-              var user = getUserFromToken() || currentUser;
-              return $http.get('/users/'+user);
+              var token = $localStorage.token;
+              // check that the token is present, and not expired
+              if (!token) return false;
+              if (jwtHelper.isTokenExpired(token)) return false;
+              // make sure that the proclaimed user is a real user
+              var user = getUserFromToken();
+              var promise = $http.get('/users/'+user);
+              return promise;
+
+
+              // var user = getUserFromToken() || currentUser;
+              // if (user) {
+              //   var token = $localStorage.token;
+              //   if (!jwtHelper.isTokenExpired(token)) {
+              //     // $http.get('/users/'+user)
+              //     // .success(function(res){
+              //     //   console.log('here');
+              //     //   return res.type;
+              //     // }).error(function(err){
+              //     //   return false;
+              //     // });
+              //     isUserValid(user, function(res){
+              //       console.log('here');
+              //       return res.type;
+              //     }, function(){
+              //       return false;
+              //     });
+              //   } else {
+              //     console.log('token expired, log in again');
+              //     return false;
+              //   };
+              // } else {
+              //   console.log('user does not have a token');
+              //   return false;
+              // };
+              // return "hello";
               // $http.get('/users/'+user).success(success).error(error);
             }
         };
-    }
-]);
+    }]);

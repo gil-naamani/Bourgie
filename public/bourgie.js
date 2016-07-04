@@ -1,7 +1,8 @@
 var dependencies = [
   'ngStorage',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'angular-jwt'
 ]
 
 var bourgie = angular.module('bourgie', dependencies);
@@ -50,21 +51,23 @@ bourgie.config(['$routeProvider', '$httpProvider', function($routeProvider, $htt
 // TODO: also verify that the token is valid
 var isLoggedIn = function ($location, $q, authService) {
     var deferred = $q.defer();
-    authService.isAuthenticated()
-      .success(function(res){
-        console.log(res);
-        if (res.type == true){
-          console.log('continue to secure page');
+    var promise = authService.isAuthenticated();
+    console.log(promise);
+    var isValid;
+    if (promise){
+      promise.then(function(res){
+        isValid = res.data.type;
+        console.log(isValid);
+        if (isValid){
           deferred.resolve();
         } else {
-          console.log('user must login first');
           deferred.reject();
           $location.url('/login');
-        };
-    }).error(function(err){
-      console.log('cannot continue to secure page: '+err);
+        }
+      });
+    } else {
       deferred.reject();
       $location.url('/login');
-    });
+    };
     return deferred.promise;
 };

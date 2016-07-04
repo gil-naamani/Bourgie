@@ -117,7 +117,7 @@ router.post('/signup/', function(req, res, next) {
 });
 
 var newToken = function(username){
-  return jwt.sign(username, process.env.JWT_SECRET);
+  return jwt.sign({user : username}, process.env.JWT_SECRET, { expiresIn: '1h' });
 };
 
 var md5hash = function(password){
