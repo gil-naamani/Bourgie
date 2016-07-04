@@ -1,4 +1,4 @@
-bourgie.controller('homeController', ['$scope', function($scope){
+bourgie.controller('homeController', ['$scope', '$http', function($scope, $http){
 
-  $scope.username = null;
+
 }]);

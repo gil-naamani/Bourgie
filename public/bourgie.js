@@ -22,7 +22,7 @@ bourgie.config(['$routeProvider', '$httpProvider', function($routeProvider, $htt
     controller : 'scheduleController',
     templateUrl : '/views/schedule.html',
     title: 'Login',
-    resolve: {loggedIn:isLoggedIn}
+    resolve: {loggedIn:isValidTokenAndUser}
   }).otherwise({
     redirectTo : '/'
   });
@@ -31,6 +31,7 @@ bourgie.config(['$routeProvider', '$httpProvider', function($routeProvider, $htt
   $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
     return {
         'request': function (config) {
+            console.log('intercepting');
             config.headers = config.headers || {};
             if ($localStorage.token) {
                 config.headers.Authorization = 'Bearer ' + $localStorage.token;
@@ -47,9 +48,7 @@ bourgie.config(['$routeProvider', '$httpProvider', function($routeProvider, $htt
     }]);
 }]);
 
-// verify that the username exists in the token
-// TODO: also verify that the token is valid
-var isLoggedIn = function ($location, $q, authService) {
+var isValidTokenAndUser = function ($location, $q, authService) {
     var deferred = $q.defer();
     var promise = authService.isAuthenticated();
     console.log(promise);

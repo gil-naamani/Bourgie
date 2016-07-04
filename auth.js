@@ -1,3 +1,6 @@
+var jwt = require('jsonwebtoken');
+
+
 var isAuthorized = function(req, res, next) {
     var bearerToken;
     var bearerHeader = req.headers["authorization"];
@@ -5,13 +8,14 @@ var isAuthorized = function(req, res, next) {
         var bearer = bearerHeader.split(" ");
         bearerToken = bearer[1];
         req.token = bearerToken;
-        // TODO:
-        // verify that the token is valid
-        // check if the token exits - if not error
-        // check if the token has not expired - if not error
+        // check if the token has expired - send 403 if so
+        //TODO: otherwise make sure that the user is valid
+        jwt.verify(bearerToken, process.env.JWT_SECRET, function(err, decoded){
+          if (err) res.sendStatus(403);
+        });
         next();
     } else {
-        res.send(403);
+        res.sendStatus(403);
     }
 }
 

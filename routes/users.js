@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
-var jwt = require("jsonwebtoken");
-
+var jwt = require('jsonwebtoken');
 var pool = require('../db').pool;
 
 router.get('/:username', function(req, res, next) {
@@ -115,6 +114,7 @@ router.post('/signup/', function(req, res, next) {
     });
   });
 });
+
 
 var newToken = function(username){
   return jwt.sign({user : username}, process.env.JWT_SECRET, { expiresIn: '1h' });

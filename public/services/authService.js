@@ -12,10 +12,6 @@ angular.module('bourgie')
 
         var currentUser = getUserFromToken();
 
-        function isUserValid(user){
-            return $http.get('/users/'+user);
-        };
-
         return {
             signup: function(data, success, error) {
                 $http.post('/users/signup', data).success(success).error(error)
@@ -41,35 +37,6 @@ angular.module('bourgie')
               var user = getUserFromToken();
               var promise = $http.get('/users/'+user);
               return promise;
-
-
-              // var user = getUserFromToken() || currentUser;
-              // if (user) {
-              //   var token = $localStorage.token;
-              //   if (!jwtHelper.isTokenExpired(token)) {
-              //     // $http.get('/users/'+user)
-              //     // .success(function(res){
-              //     //   console.log('here');
-              //     //   return res.type;
-              //     // }).error(function(err){
-              //     //   return false;
-              //     // });
-              //     isUserValid(user, function(res){
-              //       console.log('here');
-              //       return res.type;
-              //     }, function(){
-              //       return false;
-              //     });
-              //   } else {
-              //     console.log('token expired, log in again');
-              //     return false;
-              //   };
-              // } else {
-              //   console.log('user does not have a token');
-              //   return false;
-              // };
-              // return "hello";
-              // $http.get('/users/'+user).success(success).error(error);
             }
         };
     }]);
