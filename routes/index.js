@@ -5,9 +5,11 @@ var router = express.Router();
 /******************************/
 
 var users = require('./users');
+var schedule = require('./schedule');
 
 /* define routes for each router */
 /******************************/
 router.use('/users', users);
+router.use('/schedule', schedule);
 
 module.exports = router;

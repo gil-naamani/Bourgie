@@ -1,4 +1,12 @@
 /*ALL*/
+/*@font-face {
+    font-family: 'Skarpal';
+    src: url('SkarpaLt.ttf');
+}
+
+header {
+  font-family: "Skarpal";
+}*/
 
 body {
   /*padding: 50px;*/
@@ -17,6 +25,14 @@ nav {
   color: #18bc9c !important;
 }
 
+.partial{
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.cursor-hand{
+  cursor: pointer;
+}
 /*LANDING PAGE*/
 
 .landing-button {
@@ -41,4 +57,9 @@ nav {
 
 .inner-container{
   padding: 10%;
+}
+
+/*SCHEDULE*/
+.schedule-calendar{
+  padding-top: 7%;
 }

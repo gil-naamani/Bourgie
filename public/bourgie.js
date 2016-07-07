@@ -2,8 +2,9 @@ var dependencies = [
   'ngStorage',
   'ngRoute',
   'ui.bootstrap',
-  'angular-jwt'
-]
+  'angular-jwt',
+  'ui.calendar',
+  'ngAnimate']
 
 var bourgie = angular.module('bourgie', dependencies);
 

@@ -6,12 +6,14 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "~1.4.0",
-    "angular-route": "~1.4.0",
+    "angular": "*",
+    "angular-route": "*",
     "angular-bootstrap":"*",
     "bootstrap": "*",
     "jquery": "*",
     "ngstorage": "*",
-    "angular-jwt": "*"
+    "angular-jwt": "*",
+    "angular-ui-calendar": "*",
+    "angular-animate": "*"
   }
 }
