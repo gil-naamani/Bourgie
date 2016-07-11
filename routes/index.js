@@ -6,10 +6,12 @@ var router = express.Router();
 
 var users = require('./users');
 var schedule = require('./schedule');
+var categories = require('./categories');
 
 /* define routes for each router */
 /******************************/
 router.use('/users', users);
 router.use('/schedule', schedule);
+router.use('/categories', categories);
 
 module.exports = router;

@@ -1,19 +1,21 @@
-bourgie.controller('scheduleModalController', ['$scope', '$uibModalInstance', 'items', function($scope, $uibModalInstance, items) {
+bourgie.controller('scheduleModalController', ['$scope', '$uibModalInstance', 'defaults', function($scope, $uibModalInstance, defaults) {
 
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
+  $scope.title = defaults.title;
 
-  $scope.eventName;
-  $scope.eventAmount;
-  $scope.eventDate;
-  $scope.eventInterval;
+  $scope.event = {
+    username : defaults.username,
+    id : defaults.id || null,
+    category : defaults.category || null,
+    name : defaults.name || null,
+    amount : defaults.amount || null,
+    date : defaults.date || new Date(),
+    interval : defaults.interval || null
+  }
   $scope.intervals = ['weekly', 'biweekly', 'monthly', 'annually'];
 
-
-  $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.item);
+  $scope.ok = function (action) {
+    $scope.event["action"] = action;
+    $uibModalInstance.close($scope.event);
   };
 
   $scope.cancel = function () {

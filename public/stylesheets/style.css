@@ -35,6 +35,10 @@ nav {
 }
 /*LANDING PAGE*/
 
+.logo{
+  width: 15em !im
+}
+
 .landing-button {
   border: 1px solid #2C3E50 !important;
   color: black !important;
@@ -62,4 +66,14 @@ nav {
 /*SCHEDULE*/
 .schedule-calendar{
   padding-top: 7%;
+}
+
+.income {
+  background-color: green !important;
+  border-color: black !important;
+}
+
+.expense {
+  background-color: red !important;
+  border-color: black !important;
 }

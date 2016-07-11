@@ -1,43 +1,40 @@
-<div class="container partial">
+<div class="container partial" ng-init="init()">
 
-  <div class="col-lg-8 col-lg-offset-7 text-center">
-      <a ng-click="open()" class="btn btn-lg btn-outline landing-button">
-          Add New Event
+  <div class="col-lg-8 col-lg-offset-2 text-center">
+      <a ng-click="open(0)" class="btn btn-lg btn-outline landing-button">
+          Schedule Event
       </a>
   </div>
   <!-- MODAL INSTANCE -->
   <div>
     <script type="text/ng-template" id="scheduleModal.html">
         <div class="modal-header">
-            <h3 class="modal-title">Add Event</h3>
+            <h3 class="modal-title">{{title}}</h3>
         </div>
         <div class="modal-body">
             <form class="form-horizontal">
               <div class="form-group">
                 <label class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" ng-modal="eventName" placeholder="My Event"></input>
+                  <input type="text" class="form-control" ng-model="event.name" placeholder="My Event"></input>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Amount</label>
                 <div class="col-sm-10">
-                   <input type="number" class="form-control" ng-modal="eventAmount" placeholder="$$$"></input>
+                   <input type="number" class="form-control" ng-model="event.amount" placeholder="$$$"></input>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Start</label>
                 <div class="col-sm-10">
-                  <input type="date" class="form-control" ng-modal="eventDate"></input>
+                  <input type="date" class="form-control" ng-model="event.date"></input>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Interval</label>
                 <div class="col-sm-10">
-                  <!-- <select ng-model="eventInterval">
-                    <option ng-repeat="interval in intervals">{{interval}}</option>
-                  </select> -->
-                    <select class="form-control" ng-modal="eventInterval">
+                    <select class="form-control" ng-model="event.interval">
                       <option ng-repeat="interval in intervals">{{interval}}</option>
                     </select>
                 </div>
@@ -45,7 +42,9 @@
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">Submit</button>
+            <button class="btn btn-primary" type="button" ng-if="!event.id" ng-click="ok('create')">Submit</button>
+            <button class="btn btn-primary" type="button" ng-if="event.id" ng-click="ok('update')">Update</button>
+            <button class="btn btn-warning" type="button" ng-if="event.id" ng-click="ok('delete')">Delete</button>
             <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
         </div>
     </script>
