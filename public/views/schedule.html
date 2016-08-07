@@ -1,9 +1,27 @@
 <div class="container partial" ng-init="init()">
 
-  <div class="col-lg-8 col-lg-offset-2 text-center">
-      <a ng-click="open(0)" class="btn btn-lg btn-outline landing-button">
-          Schedule Event
-      </a>
+  <div class="col-xs-12 profile">
+
+    <div class="col-sm-3 col-xs-6">
+      <img class="profile-pic" src='./images/GiladSmile.jpg'/>
+    </div>
+    <div class="col-sm-9 col-xs-6 outlined details">
+      <div class="col-md-6 hidden-sm hidden-xs">
+        <span class="summary">
+          <p><b>Name:</b> Gilad Naamani</p>
+          <p><b>Job Title:</b> Software Engineer</p>
+          <p><b>Company:</b> Cisco Systems</p>
+          <p><b>Annual Salary:</b> $$$$$$</p>
+          <label class="btn btn-default btn-file">
+            Browse <input type="file" style="display: none;">
+          </label>
+        </span>
+      </div>
+      <div class="col-sm-6 col-xs-12 spend">
+        <p class="income-amount">$123123</p>
+        <p class="spent-amount">$2343</p>
+      </div>
+    </div>
   </div>
   <!-- MODAL INSTANCE -->
   <div>
@@ -48,8 +66,21 @@
             <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
         </div>
     </script>
-</div>
+  </div>
 </br>
-  <div class="schedule-calendar" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
-
+<div class="col-sm-4 col-xs-12 outlined categories left">
+  <div class="text-center">
+      <a ng-click="open(0)" class="btn btn-outline landing-button">
+           New Category
+      </a>
+  </div>
+</div>
+  <div class="col-sm-7 col-xs-12 outlined schedule right">
+    <div class="text-center">
+        <a ng-click="open(0)" class="btn btn-outline landing-button">
+            Schedule Event
+        </a>
+    </div>
+    <div class="schedule-calendar" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
+  </div>
 </div>

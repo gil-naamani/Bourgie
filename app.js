@@ -32,6 +32,5 @@ app.use('/', routes);
 process.on('uncaughtException', function(err) {
     console.log(err);
 });
-// app.use('/users', users);
 
 module.exports = app;

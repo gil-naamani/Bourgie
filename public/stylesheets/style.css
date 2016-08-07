@@ -33,6 +33,19 @@ nav {
 .cursor-hand{
   cursor: pointer;
 }
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+.outlined{
+  border: 1px solid lightgray;
+  box-shadow: 0 0 3px lightgray;
+
+}
 /*LANDING PAGE*/
 
 .logo{
@@ -64,6 +77,40 @@ nav {
 }
 
 /*SCHEDULE*/
+.profile{
+  margin-bottom: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-pic{
+  width: 100%;
+  border-radius: 50%;
+  padding: 5%;
+  margin-left: -10%;
+}
+.details{
+  padding: 1em 0em 1em 1em;
+}
+.summary{
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.income-amount{
+  font-size: 4em;
+  color: green;
+}
+
+.spent-amount{
+  font-size: 4em;
+  color: red;
+}
+.categories{
+  /*margin-left: 3%;*/
+}
+
 .schedule-calendar{
   padding-top: 7%;
 }
