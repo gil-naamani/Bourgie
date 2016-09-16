@@ -1,16 +1,22 @@
 var express = require('express');
+var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var config = require('./config/config');
 
-var routes = require('./routes/index');
+mongoose.connect(config.url);
+require('./models/category');
+require('./models/user');
+require('./models/expense');
 
-var app = express();
+var routes = require('./routes/router');
 
 if (!process.env.JWT_SECRET){
-  process.env['JWT_SECRET'] = 'ilovezebrasandowls';
+  process.env['JWT_SECRET'] = config.secret;
 };
 
 // uncomment after placing your favicon in /public
