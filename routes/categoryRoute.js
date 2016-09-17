@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var responseObj = require('../res').responseObj;
 var Category = mongoose.model('Category')
+var User = mongoose.model('User');
 
 
 //* GET routes

@@ -14,12 +14,11 @@ angular.module('bourgie')
 
         return {
             signup: function(data, success, error) {
-                $http.post('/users/signup', data).success(success).error(error)
+                $http.post('/user/', data).success(success).error(error)
             },
             signin: function(data, success, error) {
-                $http.put('/users/signin', data).success(success).error(error)
+                $http.put('/user/', data).success(success).error(error)
             },
-            // TODO: make api call to invalidate the token
             signout: function(success) {
               currentUser = undefined;
               delete $localStorage.token;
@@ -35,7 +34,7 @@ angular.module('bourgie')
               if (jwtHelper.isTokenExpired(token)) return false;
               // make sure that the proclaimed user is a real user
               var user = getUserFromToken();
-              var promise = $http.get('/users/'+user);
+              var promise = $http.get('/user/'+user);
               return promise;
             }
         };

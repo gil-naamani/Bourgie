@@ -5,4 +5,10 @@ var Category = new mongoose.Schema({
   amt: Number
 });
 
+Category.pre('remove', function(callback) {
+    // Remove all the docs that refers
+    this.model('User').remove({ categories: this._id }, callback);
+    this.model('Expense').remove({ category: this._id}, callback);
+});
+
 mongoose.model('Category', Category);
