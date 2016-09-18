@@ -2,11 +2,14 @@ bourgie.controller('globalController', ['$scope', '$location', '$localStorage','
     function($scope, $location, $localStorage, authService){
 
   $scope.token = $localStorage.token || null;
-  $scope.user = authService.getCurrentUser();
+  $scope.user = setNullUser();
 
-  $scope.setToken = function(username, token){
+  $scope.setUserToken = function(user, token){
     $scope.token = token;
-    $scope.user = username;
+    $scope.user['username'] = user.username;
+    $scope.user['id'] = user._id;
+    $scope.user['categories'] = user.categories;
+    $scope.user['amt'] = user.amt;
   };
 
   $scope.signOut = function() {
@@ -15,7 +18,16 @@ bourgie.controller('globalController', ['$scope', '$location', '$localStorage','
     }, function() {
         alert("Failed to logout!");
     });
-    $scope.setToken(null,null);
+    $scope.user = setNullUser();
+    $scope.token = null;
   };
 
+  function setNullUser() {
+    return {
+      username : authService.getCurrentUser(),
+      id : undefined,
+      categories : [],
+      amt : 0
+    };
+  };
 }]);

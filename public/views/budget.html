@@ -1,0 +1,61 @@
+<div class="outer" style="margin-top:10%; height: 300px;">
+  <!-- Categories -->
+  <div class="col-xs-2">
+
+    <div class="list-group">
+      <button type="button" class="list-group-item active">
+        <span class="badge">14</span>
+        All Categories
+      </button>
+      <button type="button" class="list-group-item" ng-repeat="category in user.categories">
+        <span class="badge">14</span>
+        category
+      </button>
+      <button type="button" class="list-group-item" ng-click="open(0)">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        New Category
+      </button>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="col-xs-10">
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+        <span class="sr-only">60% Complete</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Modal -->
+  <div>
+    <script type="text/ng-template" id="categoryModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{title}}</h3>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="event.Title" placeholder="Category Name"></input>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Amount</label>
+                <div class="col-sm-10">
+                   <input type="number" class="form-control" ng-model="event.amt" placeholder="$$$"></input>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-if="!event.id" ng-click="ok('create')">Submit</button>
+            <button class="btn btn-primary" type="button" ng-if="event.id" ng-click="ok('update')">Update</button>
+            <button class="btn btn-warning" type="button" ng-if="event.id" ng-click="ok('delete')">Delete</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+  </div>
+
+</div>

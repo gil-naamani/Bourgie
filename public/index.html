@@ -33,8 +33,12 @@
       <!-- Application JavaScript -->
       <script type="text/javascript" src="bourgie.js"></script>
       <script type="text/javascript" src="services/authService.js"></script>
+      <script type="text/javascript" src="services/userService.js"></script>
+      <script type="text/javascript" src="services/categoryService.js"></script>
       <script type="text/javascript" src="controllers/globalController.js"></script>
       <script type="text/javascript" src="controllers/homeController.js"></script>
+      <script type="text/javascript" src="controllers/budgetController.js"></script>
+      <script type="text/javascript" src="controllers/categoryModalController.js"></script>
       <script type="text/javascript" src="controllers/loginController.js"></script>
       <script type="text/javascript" src="controllers/scheduleController.js"></script>
       <script type="text/javascript" src="controllers/scheduleModalController.js"></script>
@@ -72,7 +76,7 @@
                         </li>
                         <li class="page-scroll">
                             <a class="nav-a" href="#/login" ng-hide="token">Login</a>
-                            <a class="nav-a" ng-show="token" ng-click="signOut()"> {{user}} - Sign out</a>
+                            <a class="nav-a" ng-show="token" ng-click="signOut()"> {{user.username}} - Sign out</a>
                         </li>
                     </ul>
                 </div>

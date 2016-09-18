@@ -3,6 +3,7 @@ angular.module('bourgie')
 
   return {
     create: function(data, success, error) {
+        console.log(data);
         $http.post('/category', data).success(success).error(error)
     },
     read: function(data, success, error) {

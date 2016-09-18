@@ -75,7 +75,9 @@ router.put('/', function(req, res, next) {
           }
           // update the user's token
           user.save(function(err, user) {
-            if(err){ return next(err); }
+            if(err){
+              responseObj.failure({}, err);
+            }
 
             res.send(responseObj.success(user));
           });
@@ -100,10 +102,35 @@ router.put('/categories', function(req, res, next) {
     user.save(function(err, user) {
       if(err){ return next(err); }
 
-      User.findOne({_id : userId}).populate('categories').exec(function(err, user){
+      User.findOne({_id : userId}).exec(function(err, user){
         res.send(responseObj.success(user));
       });
     });
+  });
+});
+
+router.put('/:id/amt', function(req, res, next) {
+
+  var query = {_id: req.params.id},
+      update = { token: req.params.amt },
+      options = { upsert: true };
+
+  // Find the user
+  User.findOneAndUpdate(query, update, options, function(err, user) {
+      if (!err) {
+          // send error if the user doesn't exist
+          if (!user) {
+            res.send(responseObj.failure({}, 'user not found'));
+          }
+          // update the user's token
+          user.save(function(err, user) {
+            if(err){
+              responseObj.failure({}, err);
+            }
+
+            res.send(responseObj.success(user));
+          });
+      }
   });
 });
 

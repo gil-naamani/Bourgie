@@ -30,6 +30,9 @@
             </br>
                 <label ng-if="usrObj.newPassword">Repeat Password</label>
                 <input ng-if="usrObj.newPassword" type="password" class="form-control" ng-model="usrObj.repeatPassword"/>
+            </br>
+              <label>Monthly Spend</label>
+              <input type="number" class="form-control" required ng-model="usrObj.amt"/>
             </div>
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <a ng-click="signUp()" class="btn btn-lg btn-outline landing-button">

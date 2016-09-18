@@ -6,7 +6,8 @@ bourgie.controller('loginController', ['$rootScope', '$scope', '$location', '$lo
     password : null,
     newUsername : null,
     newPassword : null,
-    repeatPassword : null
+    repeatPassword : null,
+    amt : null
   };
 
   $scope.signIn = function() {
@@ -19,9 +20,9 @@ bourgie.controller('loginController', ['$rootScope', '$scope', '$location', '$lo
          if (res.type == false) {
              alert(res.data)
          } else {
-             console.log(res.data.token);
+             console.log(res.data);
              $localStorage.token = res.data.token;
-             $scope.setToken(formData.username,$localStorage.token);
+             $scope.setUserToken(res.data, $localStorage.token);
              $location.path("budget");
          }
      }, function() {
@@ -32,7 +33,8 @@ bourgie.controller('loginController', ['$rootScope', '$scope', '$location', '$lo
   $scope.signUp = function() {
      var formData = {
          username: $scope.usrObj.newUsername,
-         password: $scope.usrObj.newPassword
+         password: $scope.usrObj.newPassword,
+         amt: $scope.usrObj.amt
      };
 
      authService.signup(formData, function(res) {
@@ -40,8 +42,8 @@ bourgie.controller('loginController', ['$rootScope', '$scope', '$location', '$lo
              alert(res.data)
          } else {
              $localStorage.token = res.data.token;
+             $scope.setUserToken(res.data, $localStorage.token);
              $location.path("budget");
-             $scope.setToken(formData.username,$localStorage.token);
          }
      }, function() {
          $rootScope.error = 'Failed to signup';

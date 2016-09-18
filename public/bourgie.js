@@ -24,6 +24,11 @@ bourgie.config(['$routeProvider', '$httpProvider', function($routeProvider, $htt
     templateUrl : '/views/schedule.html',
     title: 'Login',
     resolve: {loggedIn:isValidTokenAndUser}
+  }).when('/budget', {
+    controller : 'budgetController',
+    templateUrl : '/views/budget.html',
+    title: 'Budget',
+    resolve: {loggedIn:isValidTokenAndUser}
   }).otherwise({
     redirectTo : '/'
   });
@@ -52,12 +57,10 @@ bourgie.config(['$routeProvider', '$httpProvider', function($routeProvider, $htt
 var isValidTokenAndUser = function ($location, $q, authService) {
     var deferred = $q.defer();
     var promise = authService.isAuthenticated();
-    console.log(promise);
     var isValid;
     if (promise){
       promise.then(function(res){
         isValid = res.data.type;
-        console.log(isValid);
         if (isValid){
           deferred.resolve();
         } else {
